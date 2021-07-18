@@ -1,6 +1,8 @@
 class Phonebook:
 	def __init__(self):
 		self.numbers = {}
+		self.filename = "phonebook.txt"
+		self.cache = open(self.filename, "w")
 
 	def add(self,name,number):
 		# For Error Message
@@ -10,6 +12,9 @@ class Phonebook:
 	def lookup(self,name):
 		return self.numbers[name]
 
+	def names(self):
+		return set(self.numbers.keys())
+
 	def is_consistent(self):
 		for name1, number1 in self.numbers.items():
 			for name2, number2 in self.numbers.items():
@@ -18,3 +23,7 @@ class Phonebook:
 				if number1.startswith(number2):
 					return False
 		return True
+
+	def clear(self):
+		self.cache.close()
+		os.remove(self.filename)
