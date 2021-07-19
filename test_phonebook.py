@@ -2,12 +2,10 @@ from phonebook import Phonebook
 import pytest
 
 @pytest.fixture
-def phonebook():
-	phonebook = Phonebook()
-	yield phonebook
-	phonebook.clear()
+def phonebook(tmpdir):
+	return Phonebook(tmpdir)
 
-	
+
 def test_lookup_by_name(phonebook):
 	phonebook.add("Alice","1234567890")
 	assert "1234567890" == phonebook.lookup("Alice")
